@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# docket-react
+
+Simple todo task app using react-redux and rudux-toolkit architecture. 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
