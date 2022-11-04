@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import TasksService from '../api/TasksService'
 import { retrieveTasks } from '../tasksSlice';
 import DeleteTask from './DeleteTask';
+import EditStatusTask from './EditStatusTask';
 import EditTask from './EditTask';
 
 
@@ -20,13 +21,22 @@ export default function TasksList(props) {
     //         });
     // }, [tasks]);
 
-    const tasks = useSelector((state) => state.tasks)
+
+    ///////////////////////////////////////////////////////////////////////////////////////////
+
+    const tasks = useSelector((state) => state.tasks.tasksList)
     const dispatch = useDispatch()
+
+    const filteredTasks = tasks.filter((task) => task.status === props.filter)
 
 
     useEffect(() => {
         dispatch(retrieveTasks())
     }, [dispatch])
+
+
+    // ////////////////////////////////////////////////////////////////////////////////////////
+
 
     // const initFetch = useCallback(() => {
     //     dispatch(retrieveTasks());
@@ -37,10 +47,16 @@ export default function TasksList(props) {
     // }, [initFetch])
 
 
+
     return (
         <div className="list-group">
+            <h4>{props.title}:</h4>
             {
-                tasks.filter((task) => task.status === props.filter).map((task, index) => {
+                (filteredTasks.length === 0) ?
+                    "No records found." : null
+            }
+            {
+                filteredTasks.map((task, index) => {
                     // const isActiveClass = (index / 2) === 0 ? ' active' : ''
                     return (
                         <div key={task.id} className='list-group-item list-group-item-action' style={{ backgroundColor: 'lightblue' }}>
@@ -54,9 +70,9 @@ export default function TasksList(props) {
                                     {
                                         task.status === 'completed'
                                             ?
-                                            <div>&#x2715;</div>
+                                            <EditStatusTask icon="&#x2715;" taskId={task.id} type="pending" />
                                             :
-                                            <div>&#10003;</div>
+                                            <EditStatusTask icon="&#10003;" taskId={task.id} type="completed" />
                                     }
                                 </div>
                                 <EditTask taskId={task.id} />

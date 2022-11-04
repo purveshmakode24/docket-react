@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { deleteTasks } from '../tasksSlice'
+import { deleteTask } from '../tasksSlice'
 
 export default function DeleteTask(props) {
     const dispatch = useDispatch()
 
     function handleDelete() {
-        dispatch(deleteTasks(props.taskId))
+        dispatch(deleteTask(props.taskId))
     }
     return (
         <>

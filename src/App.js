@@ -1,6 +1,9 @@
 import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
 import './App.css';
 import { BrowserRouter, Route, Routes, useRoutes } from 'react-router-dom';
 import { Layout } from './components/ui/Layout'
@@ -17,7 +20,6 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="/counter" element={<Counter />} />
-            {/* <Route path="contact" element={<Contact />} /> */}
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
