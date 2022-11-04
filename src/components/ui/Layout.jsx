@@ -19,7 +19,7 @@ export const Layout = () => {
         <>
             <ErrorBoundary FallbackComponent={ErrorFallback}>
                 <Header />
-                <section className='layout container-fluid' style={{ minHeight: '600px', paddingTop: '20px' }}>
+                <section className='layout container-fluid' style={{ minHeight: '650px', paddingTop: '20px' }}>
                     <Outlet />
                 </section>
                 <Footer />

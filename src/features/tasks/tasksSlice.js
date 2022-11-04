@@ -58,6 +58,7 @@ export const tasksSlice = createSlice({
         },
         [createTask.fulfilled]: (state, action) => {
             state.tasksList.push(action.payload);
+            state.isCreateTaskModalOpen = false;
         },
         [editStatusTask.fulfilled]: (state, action) => {
             let task = state.tasksList.filter(({ id }) => id === action.payload.id)[0];
