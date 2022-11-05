@@ -14,7 +14,16 @@ export const createTask = createAsyncThunk(
     "task/create",
     async (payload) => {
         const res = await TasksService.create(payload);
-        console.log(payload)
+        // console.log(payload)
+        return res;
+    }
+);
+
+export const editTask = createAsyncThunk(
+    "task/edit",
+    async ([id, payload]) => {
+        const res = await TasksService.edit(id, payload);
+        // console.log(payload)
         return res;
     }
 );
@@ -39,7 +48,8 @@ export const deleteTask = createAsyncThunk(
 
 const initialState = {
     "tasksList": [],
-    "isCreateTaskModalOpen": false
+    "isCreateTaskModalOpen": false,
+    "isEditTaskModalOpen": false
 }
 
 export const tasksSlice = createSlice({
@@ -48,6 +58,9 @@ export const tasksSlice = createSlice({
     reducers: {
         toggleCreateTaskModal: (state) => {
             state.isCreateTaskModalOpen = !state.isCreateTaskModalOpen
+        },
+        toggleEditTaskModal: (state) => {
+            state.isEditTaskModalOpen = !state.isEditTaskModalOpen
         },
     },
     extraReducers: {
@@ -60,6 +73,12 @@ export const tasksSlice = createSlice({
             state.tasksList.push(action.payload);
             state.isCreateTaskModalOpen = false;
         },
+        [editTask.fulfilled]: (state, action) => {
+            let task = state.tasksList.filter(({ id }) => id === action.payload.id)[0];
+            task.title = action.payload.title;
+            task.description = action.payload.description;
+            state.isEditTaskModalOpen = false;
+        },
         [editStatusTask.fulfilled]: (state, action) => {
             let task = state.tasksList.filter(({ id }) => id === action.payload.id)[0];
             task.status = action.payload.status;
@@ -71,6 +90,6 @@ export const tasksSlice = createSlice({
     },
 });
 
-export const { toggleCreateTaskModal } = tasksSlice.actions
+export const { toggleCreateTaskModal, toggleEditTaskModal } = tasksSlice.actions
 
 export default tasksSlice.reducer

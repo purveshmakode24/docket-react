@@ -22,13 +22,25 @@ const create = data => {
     }
 
     data.id = maxTaskId;
+    data.status = 'pending';
     taskList.push(data);
     localStorage.setItem('tasksList', JSON.stringify(taskList))
     return data;
 };
 
-const edit = (id, data) => {
-    return http.put(`/tasks/${id}`, data);
+const edit = (idd, data) => {
+    // return http.put(`/tasks/${id}`, data);
+    let taskList = [];
+
+    if (localStorage.getItem('tasksList') != null) {
+        taskList = JSON.parse(localStorage.getItem('tasksList'));
+        let task = taskList.filter(({ id }) => id === idd)[0];
+        task.title = data.title;
+        task.description = data.description;
+        localStorage.setItem('tasksList', JSON.stringify(taskList))
+        return task;
+    }
+    return { 'error': "Could not update the status of the task." }
 };
 
 const editStatus = (idd, statusType) => {

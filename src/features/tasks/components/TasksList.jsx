@@ -75,7 +75,7 @@ export default function TasksList(props) {
                                             <EditStatusTask icon="&#10003;" taskId={task.id} type="completed" />
                                     }
                                 </div>
-                                <EditTask taskId={task.id} />
+                                <EditTask task={task} />
                                 <DeleteTask taskId={task.id} />
                             </div>
                         </div>

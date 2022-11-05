@@ -11,8 +11,7 @@ export default function CreateTask(props) {
     const dispatch = useDispatch()
     const [formData, setFormData] = useState({
         title: '',
-        description: '',
-        status: 'pending'
+        description: ''
     })
 
     const handleSubmit = (event) => {
@@ -38,7 +37,7 @@ export default function CreateTask(props) {
 
                         <label>Description</label>
                         <InputText name="description" onChange={handleChange} />
-                        <Button className='mt-3' label="Save" />
+                        <Button type="submit" className="mt-3" label="Save" />
                     </form>
                 </div>
             </Sidebar>
