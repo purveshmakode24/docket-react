@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import TasksService from '../api/TasksService'
-import { retrieveTasks } from '../tasksSlice';
+import { retrieveTasks, setSelectedTaskForEdit, toggleEditTaskModal } from '../tasksSlice';
 import DeleteTask from './DeleteTask';
 import EditStatusTask from './EditStatusTask';
 import EditTask from './EditTask';
@@ -46,8 +46,6 @@ export default function TasksList(props) {
     //     initFetch()
     // }, [initFetch])
 
-
-
     return (
         <div className="list-group">
             <h4>{props.title}:</h4>
@@ -82,6 +80,8 @@ export default function TasksList(props) {
                     );
                 })
             }
+
         </div>
+
     )
 }

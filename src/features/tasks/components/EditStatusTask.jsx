@@ -5,15 +5,15 @@ import { editStatusTask } from '../tasksSlice'
 export default function EditStatusTask(props) {
     const dispatch = useDispatch();
     const handleEditStatus = (event) => {
-        event.preventDefault();
+        // event.preventDefault();
         let payload = [props.taskId, props.type];
         dispatch(editStatusTask(payload));
     }
 
     return (
         <>
-            {/* <button className='btn btn-sm btn-primary mr-2'>Edit Status</button> */}
-            <div onClick={handleEditStatus}>{props.icon}</div>
+            <button style={{ 'background': 'transparent', 'border': 'none', 'color': '#fff' }}
+                onClick={handleEditStatus}>{props.icon}</button>
         </>
     )
 }

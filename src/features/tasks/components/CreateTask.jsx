@@ -27,6 +27,7 @@ export default function CreateTask(props) {
 
     return (
         <>
+            <Button icon="pi pi-plus" label="Task" onClick={() => dispatch(toggleCreateTaskModal(true))} className="mr-2" />
             <Sidebar visible={isCreateTaskModalOpen} position="right" style={{ width: '500px' }}
                 onHide={() => dispatch(toggleCreateTaskModal(false))}>
                 <h3>Create Task</h3>

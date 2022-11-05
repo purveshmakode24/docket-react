@@ -49,7 +49,8 @@ export const deleteTask = createAsyncThunk(
 const initialState = {
     "tasksList": [],
     "isCreateTaskModalOpen": false,
-    "isEditTaskModalOpen": false
+    "isEditTaskModalOpen": false,
+    "selectedTask": null
 }
 
 export const tasksSlice = createSlice({
@@ -61,6 +62,12 @@ export const tasksSlice = createSlice({
         },
         toggleEditTaskModal: (state) => {
             state.isEditTaskModalOpen = !state.isEditTaskModalOpen
+            if (!state.isEditTaskModalOpen) {
+                state.selectedTask = null
+            }
+        },
+        setSelectedTaskForEdit: (state, action) => {
+            state.selectedTask = action.payload;
         },
     },
     extraReducers: {
@@ -78,6 +85,7 @@ export const tasksSlice = createSlice({
             task.title = action.payload.title;
             task.description = action.payload.description;
             state.isEditTaskModalOpen = false;
+            state.selectedTask = null
         },
         [editStatusTask.fulfilled]: (state, action) => {
             let task = state.tasksList.filter(({ id }) => id === action.payload.id)[0];
@@ -90,6 +98,6 @@ export const tasksSlice = createSlice({
     },
 });
 
-export const { toggleCreateTaskModal, toggleEditTaskModal } = tasksSlice.actions
+export const { toggleCreateTaskModal, toggleEditTaskModal, setSelectedTaskForEdit } = tasksSlice.actions
 
 export default tasksSlice.reducer

@@ -8,6 +8,7 @@ export default function DeleteTask(props) {
     function handleDelete() {
         dispatch(deleteTask(props.taskId))
     }
+
     return (
         <>
             <button className='btn btn-sm btn-danger' type="button" onClick={handleDelete}>
